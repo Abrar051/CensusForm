@@ -3,19 +3,25 @@ public class CensusForm {
     public static void main (String args[]) {
         //@SuppressWarnings("resource")
         Scanner input = new Scanner (System.in);
-        String email=null;
-        String userName=null;
-        String passWord=null;
+        String email;
+        String userName;
+        String passWord;
         int serial = 0;
         int serialNumber = 0;
-        UserInfo[] user = new UserInfo[100];
+        UserInfo[] user = new UserInfo[10];
+        //user = null;
+        for (int i=0;i<10;i++)
+        {
+            user[i]= new UserInfo(null , null , null , 0 , 0);
+        }
         while (true)
         {
 
             System.out.println ("\nHi user do you want login or register input 1 for login , 2 for register : ");
             int option = input.nextInt();
-            //register 1 and login 2
-            if (option==2)
+            //register 2 and login 1
+
+            if (option==2) ///register
             {
                 int primaryResult=0;
                 System.out.println("Enter email : ");
@@ -26,8 +32,8 @@ public class CensusForm {
                 passWord=input.next();
                 user[serialNumber] = new UserInfo(email, userName, passWord, serialNumber, primaryResult);
                 user[serialNumber].printData();
-                System.out.print("Your serial number is "+serialNumber);
-                serialNumber++;
+                System.out.print("Your serial number is "+(serialNumber+1));
+                //serialNumber++;
             }
             else if (option==1)
             {
@@ -39,16 +45,23 @@ public class CensusForm {
                 System.out.println("Enter password : ");
                 passWord=input.next();
                 //System.out.println("Enter your serial number : ");
-                for (int i = 0;i<100;i++)
+                for (int i = 0;i<10;i++)
                 {
                     //if (email==this.email)
-                    serial = user[i].checkUser(email,passWord);
-                    System.out.print(serial);
+                    //serial = user[i].checkUser(email,passWord);
+                    //System.out.print(serial);
+                    if (user[i].checkUser(email,passWord)==1)
+                    {
+                        System.out.println("Your serial number is "+(i+1));
+                        serial=i;
+                        break;
+                    }
+
                 }
                 //serial=input.nextInt();
                 System.out.println("Do you want to survey or see profile : 1 survey / 2 see profile ");
                 int opt = input.nextInt();
-                if (opt==1)
+                if (opt==1)//survey answer questions
                 {
                     int result = getMarks();
                     user[serial] = new UserInfo(email, userName, passWord, serialNumber, result);
@@ -125,4 +138,3 @@ public class CensusForm {
 
     }
 }
-
