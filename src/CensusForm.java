@@ -10,10 +10,7 @@ public class CensusForm {
         int serialNumber = 0;
         UserInfo[] user = new UserInfo[10];
         //user = null;
-        for (int i=0;i<10;i++)
-        {
-            user[i]= new UserInfo(null , null , null , 0 , 0);
-        }
+
         while (true)
         {
 
@@ -24,28 +21,28 @@ public class CensusForm {
             if (option==2) ///register
             {
                 int primaryResult=0;
-                System.out.println("Enter email : ");
+                emailInput();
                 email=input.next();
-                System.out.println("Enter username : ");
+                userInput();
                 userName=input.next();
-                System.out.println("Enter password : ");
+                passwordInput();
                 passWord=input.next();
                 user[serialNumber] = new UserInfo(email, userName, passWord, serialNumber, primaryResult);
                 user[serialNumber].printData();
                 System.out.print("Your serial number is "+(serialNumber+1));
-                //serialNumber++;
+                serialNumber++;
             }
             else if (option==1)
             {
                 //login
-                System.out.println("Enter email : ");
+                emailInput();
                 email=input.next();
-                System.out.println("Enter username : ");
+                userInput();
                 userName=input.next();
-                System.out.println("Enter password : ");
+                passwordInput();
                 passWord=input.next();
                 //System.out.println("Enter your serial number : ");
-                for (int i = 0;i<10;i++)
+                for (int i = 0;i<serialNumber;i++)
                 {
                     //if (email==this.email)
                     //serial = user[i].checkUser(email,passWord);
@@ -77,7 +74,7 @@ public class CensusForm {
             {
                 System.out.println("Invalid input");
             }
-            serialNumber++;
+            //serialNumber++;
             //user[serialNumber].printData();
         }
     }
@@ -137,4 +134,17 @@ public class CensusForm {
         return result;
 
     }
+    public static void emailInput()
+    {
+        System.out.println("Enter email : ");
+    }
+    public static void userInput()
+    {
+        System.out.println("Enter user : ");
+    }
+    public static void passwordInput()
+    {
+        System.out.println("Enter password : ");
+    }
+
 }
