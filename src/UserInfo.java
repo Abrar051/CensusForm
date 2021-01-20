@@ -4,20 +4,47 @@ public class UserInfo  {
     private String userName;
     private String passWord;
     private int serialNumber;
-    private int result;
-	/*public  void setCensus(Census census) {
+
+    private Census census;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(int serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public Census getCensus() {
+        return census;
+    }
+
+    public void setCensus(Census census) {
+        this.census = census;
+    }
+
+    /*public  void setCensus(Census census) {
 	}*/
 
 
 
-    UserInfo (String email , String userName , String passWord , int serialNumber , int result)
+    UserInfo (String email , String userName , String passWord , int serialNumber , int result )
     {
         this.email=email;
         this.userName=userName;
         this.passWord=passWord;
         this.serialNumber=serialNumber;
-        this.result=result;
     }
+    ///history constructor
+
 
     /* public int Login ()
      {
@@ -31,26 +58,16 @@ public class UserInfo  {
          this.serialNumber = input.nextInt();
          return this.serialNumber;
      }*/
-    public void printData ()
-    {
-        System.out.println ("Your user is : "+this.userName);
-        //System.out.println ("Your serial number is : "+this.serialNumber);
-        System.out.println ("Your result is : "+this.result);
-        //System.out.println("Please remember serial number for login ");
-    }
+
     public int checkUser (String email , String password)
     {
         if (this.email.equals(email) && this.passWord.equals(password))
         {
             System.out.println("Data match !!");
-            //return this.serialNumber;
-            //System.out.println("Serial number "+(this.serialNumber+1));
-            //return this.serialNumber;
             return 1;
         }
         else
         {
-            //System.out.println("No data found");
             return 0;
         }
     }
@@ -136,6 +153,13 @@ public class UserInfo  {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    public void checkHistory() {
+    }
+
+    public void printData() {
+        System.out.println("Your serial number is : "+(this.serialNumber+1));
     }
 
    /* public boolean contains(String email) {
