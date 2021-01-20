@@ -8,9 +8,14 @@ public class CensusForm {
         String passWord;
         int serial = 0;
         int serialNumber = 0;
+        int[] answer = new int[3];
         UserInfo[] user = new UserInfo[10];
-        //user = null;
-
+        Census data = new Census();
+        //user = null
+        for (int i=0;i<3;i++)
+        {
+            answer[i]=0;
+        }
         while (true)
         {
 
@@ -27,8 +32,8 @@ public class CensusForm {
                 userName=input.next();
                 passwordInput();
                 passWord=input.next();
-                user[serialNumber] = new UserInfo(email, userName, passWord, serialNumber, primaryResult);
-                user[serialNumber].printData();
+                user[serialNumber] = new UserInfo(email, userName, passWord, serialNumber, primaryResult );
+                //user[serialNumber].printData();
                 System.out.print("Your serial number is "+(serialNumber+1));
                 serialNumber++;
             }
@@ -44,13 +49,15 @@ public class CensusForm {
                 //System.out.println("Enter your serial number : ");
                 for (int i = 0;i<serialNumber;i++)
                 {
-                    //if (email==this.email)
-                    //serial = user[i].checkUser(email,passWord);
-                    //System.out.print(serial);
                     if (user[i].checkUser(email,passWord)==1)
                     {
                         System.out.println("Your serial number is "+(i+1));
                         serial=i;
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("No matches found");
                         break;
                     }
 
@@ -60,24 +67,36 @@ public class CensusForm {
                 int opt = input.nextInt();
                 if (opt==1)//survey answer questions
                 {
-                    int result = getMarks();
-                    user[serial] = new UserInfo(email, userName, passWord, serialNumber, result);
+                    System.out.println("Please answer the following question");
+                    System.out.println("Marking will be based on answer : ");
+                    System.out.println("Enter 1 for option a , 2 for b and 3 for c ");
+                    System.out.println("\n\n");
+                    for (int i=0;i<3;i++)
+                    {
+                        data.printQuestion(i);
+                        int ans = input.nextInt();
+                        data.setAnswer(i,ans);
+                    }
+                    new UserInfo(email, userName, passWord, serialNumber, data.setResult());
                     //user.printData();
                 }
                 else if (opt==2)
                 {
                     user[serial].printData();
-                    //System.out.println("Your serial number is : "+serial);
+                    System.out.println("Your result is : "+data.setResult());
+                    for (int i=0;i<3;i++)
+                    {
+                        data.printHistory(i);
+                    }
                 }
             }
             else
             {
                 System.out.println("Invalid input");
             }
-            //serialNumber++;
-            //user[serialNumber].printData();
         }
     }
+
     public static int getMarks ()
     {
         Scanner input = new Scanner (System.in);
