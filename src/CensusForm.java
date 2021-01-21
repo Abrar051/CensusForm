@@ -10,6 +10,7 @@ public class CensusForm {
         int serialNumber = 0;
         int[] answer = new int[3];
         UserInfo[] user = new UserInfo[10];
+        UserInfo[] temp = new UserInfo[1];/// making a temporary user to compare
         Census data = new Census();
         //user = null
         for (int i=0;i<3;i++)
@@ -55,40 +56,44 @@ public class CensusForm {
                         serial=i;
                         break;
                     }
-                    else
-                    {
-                        System.out.println("No matches found");
-                        break;
-                    }
 
                 }
                 //serial=input.nextInt();
-                System.out.println("Do you want to survey or see profile : 1 survey / 2 see profile ");
-                int opt = input.nextInt();
-                if (opt==1)//survey answer questions
+                if (user[serial].checkUser(email,passWord)==1)
                 {
-                    System.out.println("Please answer the following question");
-                    System.out.println("Marking will be based on answer : ");
-                    System.out.println("Enter 1 for option a , 2 for b and 3 for c ");
-                    System.out.println("\n\n");
-                    for (int i=0;i<3;i++)
+                    System.out.println("Do you want to survey or see profile : 1 survey / 2 see profile ");
+                    int opt = input.nextInt();
+                    if (opt==1)//survey answer questions
                     {
-                        data.printQuestion(i);
-                        int ans = input.nextInt();
-                        data.setAnswer(i,ans);
+                        System.out.println("Please answer the following question");
+                        System.out.println("Marking will be based on answer : ");
+                        System.out.println("Enter 1 for option a , 2 for b and 3 for c ");
+                        System.out.println("\n\n");
+                        for (int i=0;i<3;i++)
+                        {
+                            data.printQuestion(i);
+                            int ans = input.nextInt();
+                            data.setAnswer(i,ans);
+                        }
+                        new UserInfo(email, userName, passWord, serialNumber, data.setResult());
+                        //user.printData();
                     }
-                    new UserInfo(email, userName, passWord, serialNumber, data.setResult());
-                    //user.printData();
+                    else if (opt==2)//check profile and history
+                    {
+                        user[serial].printData();
+                        System.out.println("Your result is : "+data.setResult());
+                        for (int i=0;i<3;i++)
+                        {
+                            data.printHistory(i);
+                        }
+                    }
                 }
-                else if (opt==2)
+                else
                 {
-                    user[serial].printData();
-                    System.out.println("Your result is : "+data.setResult());
-                    for (int i=0;i<3;i++)
-                    {
-                        data.printHistory(i);
-                    }
+                    System.out.println("No matches found");
+                    break;
                 }
+
             }
             else
             {
