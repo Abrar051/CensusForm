@@ -61,8 +61,7 @@ public class UserInfo  {
 
     public int checkUser (String email , String password)
     {
-        if (this.email.equals(email) && this.passWord.equals(password))
-        {
+        if (this.email.equals(email) && this.passWord.equals(password)) {
             System.out.println("Data match !!");
             return 1;
         }
@@ -86,7 +85,7 @@ public class UserInfo  {
 
 
     @SuppressWarnings("resource")
-    public static int getMarks ()
+    /*public static int getMarks ()
     {
         Scanner input = new Scanner (System.in);
         int q1=0;
@@ -129,7 +128,7 @@ public class UserInfo  {
         int result = q1+q2+q3;
         return result;
 
-    }
+    }*/
 
 
 
